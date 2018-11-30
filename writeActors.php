@@ -35,10 +35,10 @@
         ", ".mysqli_connect_error().")");
     }
   //Gets fname, lname, and all titles
-  $mySQL_2 = "SELECT
-	CONCAT(first_name,
+  $mySQL = "SELECT
+	CONCAT(last_name,
 	' ',
-	last_name)AS Actor,
+	first_name)AS Actor,
 	title AS Film
 FROM
 	film_actor AS t1
@@ -47,30 +47,44 @@ INNER JOIN actor AS t2 ON
 INNER JOIN film AS t3 ON
 	t1.film_id = t3.film_id
 ORDER BY
-	first_name,
-	last_name ASC;";
+	last_name, first_name ASC;";
 
-  $result2 = mysqli_query($connect, $mySQL_2);
-  if (!$result2) {
-      die("Could not successfully run query ($mySQL_2) from $db: " .
+  $result = mysqli_query($connect, $mySQL);
+  if (!$result) {
+      die("Could not successfully run query ($mySQL) from $db: " .
           mysqli_error($connect));
   }
-  if (mysqli_num_rows($result2) == 0) {
-      print("No records found with query $mySQL_2");
+  if (mysqli_num_rows($result) == 0) {
+      print("No records found with query $mySQL");
   }
-  while ($row = mysqli_fetch_assoc($result2)) {
+  while ($row = mysqli_fetch_assoc($result)) {
       foreach ($row as $key => $value) {
-          $r2[$key][] = $row[$key];
+          $a[$key][] = $row[$key];
       }
   }
-    $r3 = $r2['Actor'];
-    $r4 = $r2['Film'];
-    $c = array_combine_($r3, $r4);
-    $filmCount = array_count_values($r2['Actor']);
+    $actorList = $a['Actor'];
+    $aList = array_values(array_unique($actorList));
+    foreach ($aList as $key => $value) {
+        $name[$value] = explode(' ', $value);
+    }
+    $filmList = $a['Film'];
+    $combinedList = array_combine_($actorList, $filmList);
+    $filmCount = array_count_values($a['Actor']);
+    $finalList = array_merge_recursive($name, $filmCount, $combinedList);
     echo "<pre>";
-    print_r($c);
+    print_r($finalList);
     echo "</pre>";
-    $outputFile = fopen("writeActors.txt", "w");
+    $outputFile = fopen("writeActors.txt", "w") or die("Unable to open file!");
+    foreach ($finalList as $key => $value) {
+        $txt = $finalList[$key][0].",".$finalList[$key][1].",".$finalList[$key][2];
+        for ($i=3; $i <= ((sizeof($finalList[$key])-1)); $i++) {
+            $txt1 = ",".$finalList[$key][$i];
+            fwrite($outputFile, $txt1);
+            if ($i == count($finalList[$key])) {
+                fwrite($outputFile, "\n");
+            }
+        }
+    }
 
 
 
