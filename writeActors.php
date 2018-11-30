@@ -71,30 +71,58 @@ ORDER BY
     $combinedList = array_combine_($actorList, $filmList);
     $filmCount = array_count_values($a['Actor']);
     $finalList = array_merge_recursive($name, $filmCount, $combinedList);
-    echo "<pre>";
-    print_r($finalList);
-    echo "</pre>";
-    $outputFile = fopen("writeActors.txt", "w") or die("Unable to open file!");
+    $outputFile = fopen("writeActors.txt", "rw") or die("Unable to open file!");
     foreach ($finalList as $key => $value) {
-        $txt = $finalList[$key][0].",".$finalList[$key][1].",".$finalList[$key][2];
-        for ($i=3; $i <= ((sizeof($finalList[$key])-1)); $i++) {
-            $txt1 = ",".$finalList[$key][$i];
+        $txt = $finalList[$key][0].",".$finalList[$key][1].":".$finalList[$key][2].":";
+        fwrite($outputFile, $txt);
+        for ($i=3; $i <= ((sizeof($finalList[$key]))-1); $i++) {
+            $txt1 = $finalList[$key][$i].",";
             fwrite($outputFile, $txt1);
-            if ($i == count($finalList[$key])) {
+            if ($i == (sizeof($finalList[$key])-1)) {
                 fwrite($outputFile, "\n");
             }
         }
     }
+    ?>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Films Appeared</th>
+          <?php
+          $e = 1;
+          foreach ($finalList as $key => $value) {
+              while ($e <= $finalList[$key][2]) {
+                  echo "<th scople='col'>Film".$e."</th>";
+                  $e++;
+              }
+          }
+
+           ?>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $f = 1;
+        foreach ($finalList as $key => $value) {
+            echo "<tr>";
+            echo "<th scope = 'row'>".$f."</th>";
+            echo "<td>".$finalList[$key][0]."</td>";
+            echo "<td>".$finalList[$key][1]."</td>";
+            echo "<td>".$finalList[$key][2]."</td>";
+            for ($i=3; $i <= ((sizeof($finalList[$key]))-1); $i++) {
+                echo "<td>".$finalList[$key][$i].",";
+            }
+            $f++;
+            echo "</tr>";
+        }
+         ?>
+      </tbody>
+    </table>
 
 
-
-
-
-
-
-
-
-     ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
