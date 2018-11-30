@@ -88,8 +88,8 @@ ORDER BY
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">First</th>
           <th scope="col">Last</th>
+          <th scope="col">First</th>
           <th scope="col">Films Appeared</th>
           <?php
           $e = 1;
@@ -99,7 +99,6 @@ ORDER BY
                   $e++;
               }
           }
-
            ?>
         </tr>
       </thead>
@@ -118,6 +117,8 @@ ORDER BY
             $f++;
             echo "</tr>";
         }
+        fclose($outputFile);
+        mysqli_close($connect);
          ?>
       </tbody>
     </table>
