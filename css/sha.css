@@ -1,0 +1,30 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+.rounded{
+  border-radius: 0.25rem !important;
+}
+.c1{
+  padding-top: 220px;
+}
+.text-muted{
+    color: #6c757d!important;
+}
+.c2{
+  padding-top: 25px !important;
+  margin-left: 0px;
+  padding-left: 0px !important;
+  border-left: 10px;
+}
+.a1{
+  margin-left: 7px !important;
+}
+.a2{
+  padding-right: 15px !important;
+}
+.p1{
+  margin-top: 0px !important;
+}
+.h1{
+  margin-bottom: 15px !important;
+}
