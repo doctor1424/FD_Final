@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Actors</title>
   </head>
   <body>
     <?php
@@ -71,7 +71,7 @@ ORDER BY
     $combinedList = array_combine_($actorList, $filmList);
     $filmCount = array_count_values($a['Actor']);
     $finalList = array_merge_recursive($name, $filmCount, $combinedList);
-    $outputFile = fopen("writeActors.txt", "rw") or die("Unable to open file!");
+    $outputFile = fopen("Text_Files/writeActors.txt", "rw") or die("Unable to open file!");
     foreach ($finalList as $key => $value) {
         $txt = $finalList[$key][0].",".$finalList[$key][1].":".$finalList[$key][2].":";
         fwrite($outputFile, $txt);
