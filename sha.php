@@ -85,21 +85,21 @@
     $loader = new Twig_Loader_Filesystem('views/');
     if (!($falseTest)) {
         throw new \Exception("Error Processing Request. Value Entered was not in a sha1, sha224, or 256 format.", 1);
-    } elseif ($shaX){
-       $twig = new Twig_Environment($loader);
-      echo $twig->render('template.html.twig', $sh = array(
+    } elseif ($shaX) {
+        $twig = new Twig_Environment($loader);
+        echo $twig->render('template.html.twig', $sh = array(
         'hash' => $sha,
         'sha1' => $sha1HashValue
       ));
     } elseif ($shaY) {
-      $twig = new Twig_Environment($loader, ['$sha224' => $sha224HashValue]);
-      echo $twig->render('template.html.twig', $sh = array(
+        $twig = new Twig_Environment($loader, ['$sha224' => $sha224HashValue]);
+        echo $twig->render('template.html.twig', $sh = array(
         'hash' => $sha,
         'sha1' => $sha224HashValue
       ));
     } else {
-      $twig = new Twig_Environment($loader, ['$sha256' => $sha256HashValue]);
-      echo $twig->render('template.html.twig', $sh = array(
+        $twig = new Twig_Environment($loader, ['$sha256' => $sha256HashValue]);
+        echo $twig->render('template.html.twig', $sh = array(
         'hash' => $sha,
         'sha1' => $sha256HashValue
       ));
