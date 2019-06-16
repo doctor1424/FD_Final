@@ -11,7 +11,7 @@ single pdf file titled **finalExam.pdf**. (If you submit in some other format ot
 submission will not be counted). ***These files are to be submitted to UTC Learn Under “TestSubmission”
 -&gt; “FinalExam”.***
 
-## Task 1:
+### Task 1:
 1. Create a file titled writeActors.php. This file should query your database to find all the movies
 that each actor starred in. You need to write to a text file a record for each actor. The record
 should contain the first and last name of the actor, the number of films they starred in, and a list
@@ -28,7 +28,7 @@ processing for you, or you can simply use SQL to “grab” the info from the da
 process the info. If you concatenate actor last name and first name you will have a unique value you can
 use as a key in an associative array.
 
-## Task 2:
+### Task 2:
 1. For this task you will create a reverse SHA lookup website. A user will be able to provide a SHA
 hash value, and you should present the string that created the SHA value. You are given 3 input
 files, **sha1_list.txt, sha224_list.txt, and sha256_list.txt**. Each file has the
@@ -48,6 +48,3 @@ that the value could not be found in the server’s records.
 
 5. You should include a button and an input form that allows the user to search for another string[
 and triggers the same php script again.
-
-### Known Issues:
-Within the **writeActors.php**, currently when accessing the sakila database it acesses a list of **actors, the number of films appeared in, and the title of each film**. When putting the actors names into an array were get unique name values but this takes out actors with the same first and last names but different actorID numbers. Working on fix.
